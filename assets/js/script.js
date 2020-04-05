@@ -13,97 +13,42 @@
  
 // ****** Character options
 
-var CharNum = prompt("How many characters (8-128) do you want?");
-var specialChar = ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', ']', '[', '\', ^', '_', '`', '{', '|', '}', '~'];
-var lowercaseChar = ['z', 'a', 'q', 'x', 's', 'w', 'c', 'd', 'e', 'v', 'f', 'r', 'b', 'g', 't', 'n', 'h', 'y', 'm', 'j', 'u', 'k', 'i', 'l', 'o', 'p'];
-var uppercaseChar = ['L', 'K', 'J', 'H', 'G', 'F', 'D', 'S', 'A', 'M', 'N', 'B', 'V', 'C', 'X', 'Z', 'P', 'O', 'I', 'U', 'Y', 'T', 'R', 'E', 'W', 'Q'];
-var numbers = ['0', '9', '7', '3', '1', '6', '8', '4', '2', '5'];
-
-// ****** Function to select number of characters
-var chooseCharNum =  function() {
-    if (CharNum > 7 && CharNum < 129) {
-      confirm("You chose " + CharNum + " characters.");
-    }
-
-    else {
-      confirm("Please enter a number from 8 to 128.");
-    }
-}
+var specialArr = ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', ']', '[', '\', ^', '_', '`', '{', '|', '}', '~'];
+var lowercaseArr = ['z', 'a', 'q', 'x', 's', 'w', 'c', 'd', 'e', 'v', 'f', 'r', 'b', 'g', 't', 'n', 'h', 'y', 'm', 'j', 'u', 'k', 'i', 'l', 'o', 'p'];
+var uppercaseArr = ['L', 'K', 'J', 'H', 'G', 'F', 'D', 'S', 'A', 'M', 'N', 'B', 'V', 'C', 'X', 'Z', 'P', 'O', 'I', 'U', 'Y', 'T', 'R', 'E', 'W', 'Q'];
+var numericArr = ['0', '9', '7', '3', '1', '6', '8', '4', '2', '5'];
 
 
-// ****** Function to select Special Characters
-var chooseSpecial = function() {
-  var special = confirm("Do you want to include special characters?");
+// ****** Function to select the characters for the password
+function buildPassword() {
+  var lengthChoice = prompt("Enter the number of characters (from 8-128) you would like your password to be.");
+
+  if (isNaN(lengthChoice) || lengthChoice < 8 || lengthChoice > 128) {
+    lengthChoice = prompt("You must enter an number from 8 to 128.  Please try again.");
+  }
+ 
+  var special = confirm("Include Special characters? (ex: @, &, %, etc.)");
+  var lower = confirm("Include lowercase characters?");
+  var upper = confirm("Include UPPERCASE characters?");
+  var numeric = confirm("Include Numbers (0-9)?");
   
-  if (special) {
-    confirm("You have selected special characters");
-  specialChoice = specialChar[Math.floor(Math.random() * specialChar.length)];
-    console.log("special character: " + specialChoice);
+  var passwordSelections = {
+    length: lengthChoice,
+    hasSpecial: special,
+    hasLower: lower, 
+    hasUpper: upper,
+    hasNumeric: numeric
   }
-  else  {
-    confirm("You will not have special characters");
-  }
+
+  return passwordSelections;
+
 }
 
 
-// ****** Function to select lowercase letters
-var chooseLowerCase = function() {
-  var selLowercaseChar = confirm("Do you want to include lowercase letters?");
-
-  if (selLowercaseChar) {
-    confirm("You have selected lowercase letters");
-  lowerChoice = lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
-    console.log("lower: " + lowerChoice);
-  }
-  else  {
-    confirm("You will not have lowercase letters");
-  }
+function generatePassword() {
+  var passwordSelections = buildPassword();
+  console.log(passwordSelections);
 }
-
-
-// ****** Function to select uppercase letters
-var chooseUpperCase = function() {
-var selUppercaseChar = confirm("Do you want to include lowercase letters?");
-
- if (selUppercaseChar) {
-   confirm("You have selected uppercase letters");
-  upperChoice = uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
-   console.log("upper: " + upperChoice);
- }
- else  {
-   confirm("You will not have uppercase letters");
- }
-}
-
-
-// ****** Function to select numerical characters
-var chooseNumbers = function() {
-  var selNumbers = confirm("Do you want to include numbers?");
-
-  if (selNumbers) {
-    confirm("You have selected numbers");
-  numberChoice = [Math.floor(Math.random() * 10) + 1];
-    console.log("number: " + numberChoice);
-  }
-
-  else  {
-    confirm("You will not have numbers");
-    return;
-  }
-}
-
-
-
-//  ****** Generate random characters
-
-chooseNumbers();
-chooseUpperCase();
-chooseLowerCase();
-chooseSpecial();
-chooseCharNum();
-
-window.confirm(numberChoice + upperChoice + lowerChoice + specialChoice);
-
 
 
 
