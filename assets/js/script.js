@@ -16,7 +16,7 @@
 var CharNum = prompt("How many characters (8-128) do you want?");
 var specialChar = ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', ']', '[', '\', ^', '_', '`', '{', '|', '}', '~'];
 var lowercaseChar = ['z', 'a', 'q', 'x', 's', 'w', 'c', 'd', 'e', 'v', 'f', 'r', 'b', 'g', 't', 'n', 'h', 'y', 'm', 'j', 'u', 'k', 'i', 'l', 'o', 'p'];
-var uppercaseCHar = ['L', 'K', 'J', 'H', 'G', 'F', 'D', 'S', 'A', 'M', 'N', 'B', 'V', 'C', 'X', 'Z', 'P', 'O', 'I', 'U', 'Y', 'T', 'R', 'E', 'W', 'Q'];
+var uppercaseChar = ['L', 'K', 'J', 'H', 'G', 'F', 'D', 'S', 'A', 'M', 'N', 'B', 'V', 'C', 'X', 'Z', 'P', 'O', 'I', 'U', 'Y', 'T', 'R', 'E', 'W', 'Q'];
 var numbers = ['0', '9', '7', '3', '1', '6', '8', '4', '2', '5'];
 
 // ****** Function to select number of characters
@@ -37,6 +37,8 @@ var chooseSpecial = function() {
   
   if (special) {
     confirm("You have selected special characters");
+  specialChoice = specialChar[Math.floor(Math.random() * specialChar.length)];
+    console.log("special character: " + specialChoice);
   }
   else  {
     confirm("You will not have special characters");
@@ -46,10 +48,12 @@ var chooseSpecial = function() {
 
 // ****** Function to select lowercase letters
 var chooseLowerCase = function() {
-   var selLowercaseChar = confirm("Do you want to include lowercase letters?");
+  var selLowercaseChar = confirm("Do you want to include lowercase letters?");
 
   if (selLowercaseChar) {
     confirm("You have selected lowercase letters");
+  lowerChoice = lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
+    console.log("lower: " + lowerChoice);
   }
   else  {
     confirm("You will not have lowercase letters");
@@ -59,10 +63,12 @@ var chooseLowerCase = function() {
 
 // ****** Function to select uppercase letters
 var chooseUpperCase = function() {
-  var selUppercaseChar = confirm("Do you want to include lowercase letters?");
+var selUppercaseChar = confirm("Do you want to include lowercase letters?");
 
  if (selUppercaseChar) {
    confirm("You have selected uppercase letters");
+  upperChoice = uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
+   console.log("upper: " + upperChoice);
  }
  else  {
    confirm("You will not have uppercase letters");
@@ -74,13 +80,21 @@ var chooseUpperCase = function() {
 var chooseNumbers = function() {
   var selNumbers = confirm("Do you want to include numbers?");
 
- if (selNumbers) {
-   confirm("You have selected numbers");
- }
- else  {
-   confirm("You will not have numbers");
- }
+  if (selNumbers) {
+    confirm("You have selected numbers");
+  numberChoice = [Math.floor(Math.random() * 10) + 1];
+    console.log("number: " + numberChoice);
+  }
+
+  else  {
+    confirm("You will not have numbers");
+    return;
+  }
 }
+
+
+
+//  ****** Generate random characters
 
 chooseNumbers();
 chooseUpperCase();
@@ -88,7 +102,7 @@ chooseLowerCase();
 chooseSpecial();
 chooseCharNum();
 
-
+window.confirm(numberChoice + upperChoice + lowerChoice + specialChoice);
 
 
 
