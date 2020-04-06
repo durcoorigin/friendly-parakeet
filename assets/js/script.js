@@ -19,7 +19,7 @@ var uppercaseArr = ['L', 'K', 'J', 'H', 'G', 'F', 'D', 'S', 'A', 'M', 'N', 'B', 
 var numericArr = ['0', '9', '7', '3', '1', '6', '8', '4', '2', '5'];
 
 
-// ****** Function to select the characters for the password
+// ****** Function to select the criteria for the password
 function buildPassword() {
   var lengthChoice = prompt("Enter the number of characters (from 8-128) you would like your password to be.");
 
@@ -44,12 +44,13 @@ function buildPassword() {
 
 }
 
-
+// ****** Function to generate the password
 function generatePassword() {
     var passwordSelections = buildPassword();
     console.log(passwordSelections);
     var passwordChar = [];
   
+      // ****** generate charaters from each criteria
         var specialChar = [];
         if (passwordSelections.hasSpecial) {    
           for (var i=0; i < passwordSelections.length; i++) {
@@ -81,7 +82,7 @@ function generatePassword() {
             passwordChar.push(numericChar);
           }
         }    
-  
+        // ****** generate password from selected characters.
     var finalPassword = [];
     for (i=0; i < passwordSelections.length; i++) {
       var final=passwordChar[Math.floor(Math.random()  * passwordSelections.length)];
