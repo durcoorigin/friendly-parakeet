@@ -16,7 +16,7 @@
 var specialArr = ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', ']', '[', '\', ^', '_', '`', '{', '|', '}', '~'];
 var lowercaseArr = ['z', 'a', 'q', 'x', 's', 'w', 'c', 'd', 'e', 'v', 'f', 'r', 'b', 'g', 't', 'n', 'h', 'y', 'm', 'j', 'u', 'k', 'i', 'l', 'o', 'p'];
 var uppercaseArr = ['L', 'K', 'J', 'H', 'G', 'F', 'D', 'S', 'A', 'M', 'N', 'B', 'V', 'C', 'X', 'Z', 'P', 'O', 'I', 'U', 'Y', 'T', 'R', 'E', 'W', 'Q'];
-var numericArr = ['9', '8', '7', '3', '2', '1', '6', '5', '4', '0'];
+var numericArr = ['0', '9', '7', '3', '1', '6', '8', '4', '2', '5'];
 
 
 // ****** Function to select the characters for the password
@@ -24,10 +24,9 @@ function buildPassword() {
   var lengthChoice = prompt("Enter the number of characters (from 8-128) you would like your password to be.");
 
   if (isNaN(lengthChoice) || lengthChoice < 8 || lengthChoice > 128) {
-    lengthChoice = alert("You must enter an number from 8 to 128.  Please try again.");
-    buildPassword();
+    lengthChoice = prompt("You must enter an number from 8 to 128.  Please try again.");
   }
-
+ 
   var special = confirm("Include Special characters? (ex: @, &, %, etc.)");
   var lower = confirm("Include lowercase characters?");
   var upper = confirm("Include UPPERCASE characters?");
@@ -47,48 +46,50 @@ function buildPassword() {
 
 
 function generatePassword() {
-//  debugger;
-  var passwordSelections = buildPassword();
-  var passwordChar = [];
-    
-      var specialChar = [];
-      if (passwordSelections.hasSpecial) {    
-        for (var i=0; i < passwordSelections.length; i++) {
-          var specialChar = specialArr[Math.floor(Math.random() * i)];
-          passwordChar.push(specialChar[i]);
-        }
-      }    
+    var passwordSelections = buildPassword();
+    console.log(passwordSelections);
+    var passwordChar = [];
+  
+        var specialChar = [];
+        if (passwordSelections.hasSpecial) {    
+          for (var i=0; i < passwordSelections.length; i++) {
+            var specialChar = specialArr[Math.floor(Math.random() * passwordSelections.length)];
+            passwordChar.push(specialChar);
+          }
+        }    
+  
+        var lowerChar = [];
+        if (passwordSelections.hasLower) {    
+          for (var i=0; i < passwordSelections.length; i++) {
+            var lowerChar = lowercaseArr[Math.floor(Math.random() * passwordSelections.length)];
+            passwordChar.push(lowerChar);
+          }
+        }    
+  
+        var upperChar = [];
+        if (passwordSelections.hasUpper) {    
+          for (var i=0; i < passwordSelections.length; i++) {
+            var upperChar = uppercaseArr[Math.floor(Math.random() * passwordSelections.length)];
+            passwordChar.push(upperChar);
+          }
+        }    
+  
+        var numericChar = [];
+        if (passwordSelections.hasNumeric) {    
+          for (var i=0; i < passwordSelections.length; i++) {
+            var numericChar = numericArr[Math.floor(Math.random() * passwordSelections.length)];
+            passwordChar.push(numericChar);
+          }
+        }    
+  
+    var finalPassword = [];
+    for (i=0; i < passwordSelections.length; i++) {
+      var final=passwordChar[Math.floor(Math.random()  * passwordSelections.length)];
+      finalPassword.push(final);
+    }
 
-      var lowerChar = [];
-      if (passwordSelections.hasLower) {    
-        for (var i=0; i < passwordSelections.length; i++) {
-          var lowerChar = lowercaseArr[Math.floor(Math.random() * i)];
-          passwordChar.push(lowerChar[i]);
-        }
-      }    
-
-      var upperChar = [];
-      if (passwordSelections.hasUpper) {    
-        for (var i=0; i < passwordSelections.length; i++) {
-          var upperChar = uppercaseArr[Math.floor(Math.random() * i)];
-          passwordChar.push(upperChar[i]);
-        }
-      }    
-
-      var numericChar = [];
-      if (passwordSelections.hasNumeric) {    
-        for (var i=0; i < passwordSelections.length; i++) {
-          var numericChar = numericArr[Math.floor(Math.random() * i)];
-          passwordChar.push(numericChar[i]);
-        }
-      }    
-
-  //var passwordChar = [specialChar, lowerChar, upperChar, numericChar];
-  var final=passwordChar[Math.floor(Math.random()  * passwordSelections.length)];
-  console.log(specialChar);
+    return finalPassword.join('');
 }
-
-
 
 
 // Get references to the #generate element
